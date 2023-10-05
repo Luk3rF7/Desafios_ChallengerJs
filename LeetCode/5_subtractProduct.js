@@ -12,9 +12,19 @@
 */
 
 const subtractProductAndSum = function (n) {
+  // transform numero em array separando eles:
+  let nArr = n.toString().split('');
 
 
+  let sum = 0;
+  let product = 1
 
-
+  //
+  for (let i = 0; i < nArr.length; i++) {
+    sum += parseInt(nArr[i]);
+    product *= parseInt(nArr[i])
+    console.log(sum, product);
+  }
+  return product - sum
 }
 console.log(subtractProductAndSum(123))
