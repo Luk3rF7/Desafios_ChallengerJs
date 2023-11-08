@@ -17,20 +17,20 @@ const twoSum = function (nums, target) {
   let numLength = nums.length;
 
   // vou percorrer array para pega primeiro numero:
-  for (let i = 0; numLength; i++) {
-
+  for (let index = 0; numLength; index++) {
     //percorro array para pega segundo numero:
-    for (let j = 0; j < numLength; j++) {
+    for (let elem = 0; elem < numLength; elem++) {
+      console.log('valores', nums[index])
+      //faço check para so mar os numero e retorna como target
+      if (nums[index] + nums[elem] === target && index !== elem) {
 
-      //faço check para somar os numero e retorna como target
-      if (nums[i] + nums[j] === target && i !== j) {
         // adiciono como retorno o valor 1 e 2
-        return [i, j]
+        return console.log([index, elem])
       }
     }
-    console.error('no são dois numeros')
+    return console.error('no são dois numeros')
   };
 
 };
 
-console.log(twoSum(nums))
+twoSum(nums, 9)
