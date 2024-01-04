@@ -39,19 +39,24 @@ No entanto, o limite de tempo está definido para 50ms. Rejeita
 em t=50ms porque o limite de tempo foi atingido.
 */
 
-const timeLimit = function (fn, t) {
+
+var timeLimit = function (fn, t) {
 
   return async function (...args) {
-    return new Promise(async (resolve, reject) => {
-      const id = setTimeout(() => reject("O tempo foi extendido!"), t);
+    return new Promise((resolve, reject) => {
+      const timer = setTimeout(() => {
+        reject("Time Limit Exceeded")
+      }, t)
 
-      try {
-        const res = await fn(...args);
-        resolve(res);
-      } catch (error) {
-        reject(error)
-      }
-
+      fn(...args)
+        .then((result) => {
+          clearTimeout(timer)
+          resolve(result)
+        })
+        .catch((err) => {
+          clearTimeout(timer)
+          reject(err)
+        })
     })
   }
-}
+};
